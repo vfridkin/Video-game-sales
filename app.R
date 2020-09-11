@@ -1,11 +1,15 @@
-library(shiny)
-library(shinydashboard)
-library(shinydashboardPlus)
+source("global.R")
+
 shinyApp(
   ui = dashboardPagePlus(
-    header = dashboardHeaderPlus()
-    , sidebar = dashboardSidebar()
-    , body = dashboardBody()
+    header = dash_header()
+    , sidebar = dash_side_bar()
+    , body = dash_body()
   ),
-  server = function(input, output) { }
+  server = function(input, output, session){ 
+    
+    callModule(easy_server, "easy")
+    callModule(hard_server, "hard")
+    
+    }
 )
