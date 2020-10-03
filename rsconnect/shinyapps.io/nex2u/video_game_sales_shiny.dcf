@@ -1,0 +1,12 @@
+name: video_game_sales_shiny
+title: video_game_sales_shiny
+username:
+account: nex2u
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 2937232
+bundleId: 3698681
+url: https://nex2u.shinyapps.io/video_game_sales_shiny/
+when: 1601734135.04408
+asMultiple: FALSE
+asStatic: FALSE
