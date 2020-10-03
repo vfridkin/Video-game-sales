@@ -1,3 +1,8 @@
+v <- reactiveValues(
+  critic_range = c(0, 100)
+  , user_range = c(0, 100)
+)
+
 vgs <- reactive({
 
   df <- fread(
@@ -48,6 +53,28 @@ vgs <- reactive({
            )
   ]
 
+  df    
+})
+
+vgs_filtered <- reactive({
+  
+  df <- vgs()
+  
+  critic_range <- v$critic_range/100
+  user_range <- v$user_range/100
+  
+  if(any(critic_range != c(0, 1))){
+    df <- df[
+      critic_score %inrange% critic_range
+    ]
+  }
+  
+  if(any(user_range != c(0, 1))){
+    df <- df[
+      user_score %inrange% user_range
+    ]
+  }
+  
   cols <- c("name", "platform", "year_of_release", "genre", "publisher", 
             "na_sales", "eu_sales", "jp_sales", "other_sales", "global_sales", 
             "critic_score", "critic_count", "user_score", "user_count", "developer", 
@@ -55,13 +82,13 @@ vgs <- reactive({
   
   # Summary of unit sales for table view
   summary_unit_sales <- df[, 
-                          .(
-                            global_sales = sum(global_sales, na.rm = TRUE)
-                            , critic_score = mean(critic_score, na.rm = TRUE)
-                          )
-                          , by = c("platform", "genre", "publisher")
+                           .(
+                             global_sales = sum(global_sales, na.rm = TRUE)
+                             , critic_score = mean(critic_score, na.rm = TRUE)
+                           )
+                           , by = c("platform", "genre", "publisher")
   ][order(-global_sales)]
-    
+  
   # Summary of sales by country for chart view
   summary_country_year_sales <- df[,
                                    .(
@@ -74,8 +101,6 @@ vgs <- reactive({
                                    , by = c("year_of_release")
   ][order(year_of_release)]
   
-  
-  
   list(
     data = df
     , summary = list(
@@ -84,8 +109,6 @@ vgs <- reactive({
     )
   )
 })
-
-
 
 column_definitions <- reactive({
   
