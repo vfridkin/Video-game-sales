@@ -151,7 +151,7 @@ column_definitions <- reactive({
     )
     , critic_score = colDef(
       name = "Critic Score (Avg)"
-      , width = 95
+      , minWidth = 100
       , format = colFormat(percent = TRUE, digits = 0)
       , footer = function(x) { percent(mean(x, na.rm = TRUE))}
     )
