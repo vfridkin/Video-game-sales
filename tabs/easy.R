@@ -197,9 +197,9 @@ easy_server <- function(input, output, session){
     
     df %>% 
       e_charts(year_of_release) %>% 
-      # e_grid(left = "12%") %>%
-      # e_y_axis(name = "Total Unit Sales", index = 0, position = "left", nameLocation = "center", nameGap = 50) %>%
-      e_y_axis(name = "Sales", index = 0, position = "left") %>%
+      e_grid(left = "12%") %>%
+      e_y_axis(name = "Total Unit Sales", index = 0, position = "left", nameLocation = "center", nameGap = 50) %>%
+      # e_y_axis(name = "Sales", index = 0, position = "left") %>%
       e_x_axis(name = "Release Year", nameLocation = "center", nameGap = 25) %>%
       e_bar(other_sales, name = "Sales (Other)", stack = "country") %>% 
       e_bar(na_sales, name = "Sales (USA)", stack = "country") %>% 
@@ -208,8 +208,8 @@ easy_server <- function(input, output, session){
       e_format_y_axis(suffix = "bn") %>%
       e_line(games, symbol = "circle", showSymbol = FALSE, name = "Games", y_index = 1, color = "red"
              , symbolStyle = list(normal = list(opacity = 0.5)), lineStyle = list(normal = list(opacity = 1))) %>%
-      # e_y_axis(name = "Games Released", index = 1, position = "right", nameLocation = "center", nameGap = 40) %>%
-      e_y_axis(name = "Games", index = 1, position = "right") %>%
+      e_y_axis(name = "Games Released", index = 1, position = "right", nameLocation = "center", nameGap = 40) %>%
+      # e_y_axis(name = "Games", index = 1, position = "right") %>%
       e_hide_grid_lines(which = "y") %>%
       e_legend(top = 30) %>%
       e_title("Unit Sales by Region & Release Year") %>%
