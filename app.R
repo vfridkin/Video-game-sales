@@ -1,7 +1,7 @@
 source("global.R")
 
 shinyApp(
-  ui = dashboardPagePlus(
+  ui = dashboardPage(
     header = dash_header()
     , sidebar = dash_side_bar()
     , body = dash_body()
